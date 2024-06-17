@@ -1,7 +1,7 @@
-# Product Service Demo
+# Product Service Practice
 
 ## Overview
-Product Service Demo is a Spring Boot-based microservice designed to handle all product-related operations for an e-commerce platform. It provides a robust API for managing product inventory, details, pricing, and more.
+Product Service Practice is a Spring Boot-based microservice designed to handle all product-related operations for an e-commerce platform. It provides a robust API for managing product inventory, details, pricing, and more.
 
 ## Features
 - **Product Management**: Create, update, delete, and retrieve product details.
@@ -17,9 +17,9 @@ Product Service Demo is a Spring Boot-based microservice designed to handle all 
 
 ### Running the Application
 1. Clone the repository:
-   git clone https://github.com/your-username/product-service-demo.git
+   git clone https://github.com/swapnilshah5889/ProductServicePractice.git
 2. Navigate to the project directory:
-   cd product-service-demo
+   cd ProductServicePractice
 3. Build the project using Maven:
    mvn clean install
 4. mvn clean install
