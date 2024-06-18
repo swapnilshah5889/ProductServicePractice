@@ -3,7 +3,10 @@ package com.swapnilshah5889.ProductServicePractice.services;
 import com.swapnilshah5889.ProductServicePractice.DTOs.FakeStore.ProductResponseDTO;
 import com.swapnilshah5889.ProductServicePractice.models.Category;
 import com.swapnilshah5889.ProductServicePractice.models.Product;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpMessageConverterExtractor;
+import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -48,6 +51,21 @@ public class FakeStoreProductService implements ProductService {
         }
         return productList;
 
+    }
+
+    @Override
+    public Product createProduct(ProductResponseDTO product) {
+        RequestCallback requestCallback = restTemplate.httpEntityCallback(product, ProductResponseDTO.class);
+        HttpMessageConverterExtractor<ProductResponseDTO> responseExtractor = new HttpMessageConverterExtractor(
+                ProductResponseDTO.class, restTemplate.getMessageConverters());
+        ProductResponseDTO responseDTO = restTemplate.execute("https://fakestoreapi.com/products",
+                HttpMethod.POST, requestCallback, responseExtractor);
+
+        if(responseDTO == null) {
+            return null;
+        }
+
+        return convertFakeStoreProductDTOTOProduct(responseDTO);
     }
 
     @Override

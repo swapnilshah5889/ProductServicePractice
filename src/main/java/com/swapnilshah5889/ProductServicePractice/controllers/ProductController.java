@@ -1,7 +1,11 @@
 package com.swapnilshah5889.ProductServicePractice.controllers;
 
+import com.swapnilshah5889.ProductServicePractice.DTOs.FakeStore.ProductResponseDTO;
 import com.swapnilshah5889.ProductServicePractice.models.Product;
 import com.swapnilshah5889.ProductServicePractice.services.ProductService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -31,14 +35,14 @@ public class ProductController {
 
     /* Create New Product */
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return new Product();
+    public ResponseEntity<Product> createProduct(@RequestBody ProductResponseDTO product) {
+        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
     }
 
     /* Partial Update Product */
     @PatchMapping("/{id}")
     public Product updateProduct(@PathVariable("id") Long id,@RequestBody Product product) {
-        return new Product();
+        return product;
     }
 
     /* Replace Product */
