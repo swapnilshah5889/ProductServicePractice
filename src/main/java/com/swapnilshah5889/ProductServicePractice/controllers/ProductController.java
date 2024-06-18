@@ -1,18 +1,26 @@
 package com.swapnilshah5889.ProductServicePractice.controllers;
 
 import com.swapnilshah5889.ProductServicePractice.models.Product;
+import com.swapnilshah5889.ProductServicePractice.services.ProductService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController("/products")
+@RestController
+@RequestMapping("/products")
 public class ProductController {
+
+    ProductService productService;
+
+    ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     /* Get Product By ID */
     @GetMapping("/{id}")
     public Product getProduct(@PathVariable("id") Long id) {
-        return new Product();
+        return productService.getProduct(id);
     }
 
     /* Fetch All Products Product */
