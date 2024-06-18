@@ -1,6 +1,9 @@
 package com.swapnilshah5889.ProductServicePractice.controllers;
 
+import ch.qos.logback.core.model.processor.ProcessorException;
+import com.swapnilshah5889.ProductServicePractice.DTOs.ExceptionResponseDTO;
 import com.swapnilshah5889.ProductServicePractice.DTOs.FakeStore.ProductResponseDTO;
+import com.swapnilshah5889.ProductServicePractice.exceptions.ProductControllerExecption;
 import com.swapnilshah5889.ProductServicePractice.models.Product;
 import com.swapnilshah5889.ProductServicePractice.services.ProductService;
 import org.springframework.http.HttpStatus;
@@ -35,8 +38,11 @@ public class ProductController {
 
     /* Create New Product */
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductResponseDTO product) {
-        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
+    public ResponseEntity<Product> createProduct(@RequestBody ProductResponseDTO product)
+            throws ProductControllerExecption {
+        throw new ProductControllerExecption("Something went wrong");
+
+//        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
     }
 
     /* Partial Update Product */
@@ -54,5 +60,14 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long id) {
 
+    }
+
+    /* This is specific exception handler which will only handle exceptions for this controller */
+    @ExceptionHandler(ProductControllerExecption.class)
+    public ResponseEntity<ExceptionResponseDTO> handleProductControllerException() {
+        ExceptionResponseDTO responseDTO = new ExceptionResponseDTO();
+        responseDTO.setMessage("Something went wrong");
+        responseDTO.setDetails("Product controller specific error");
+        return new ResponseEntity<>(responseDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
