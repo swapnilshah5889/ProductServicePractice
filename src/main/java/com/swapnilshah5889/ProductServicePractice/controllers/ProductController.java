@@ -26,7 +26,7 @@ public class ProductController {
     /* Fetch All Products Product */
     @GetMapping
     public List<Product> getAllProducts() {
-        return new ArrayList<>();
+        return productService.getAllProducts();
     }
 
     /* Create New Product */
