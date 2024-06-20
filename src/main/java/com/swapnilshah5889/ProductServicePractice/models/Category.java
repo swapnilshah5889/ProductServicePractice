@@ -6,8 +6,6 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Category {
-    @Id
-    private Long id;
+public class Category extends BaseModel {
     private String title;
 }
