@@ -6,6 +6,7 @@ import com.swapnilshah5889.ProductServicePractice.DTOs.FakeStore.ProductResponse
 import com.swapnilshah5889.ProductServicePractice.exceptions.ProductControllerExecption;
 import com.swapnilshah5889.ProductServicePractice.models.Product;
 import com.swapnilshah5889.ProductServicePractice.services.ProductService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class ProductController {
 
     ProductService productService;
 
-    ProductController(ProductService productService) {
+    ProductController(@Qualifier("SelfProductService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -42,7 +43,7 @@ public class ProductController {
             throws ProductControllerExecption {
         throw new ProductControllerExecption("Something went wrong");
 
-//        return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
+    // return new ResponseEntity<>(productService.createProduct(product), HttpStatus.OK);
     }
 
     /* Partial Update Product */

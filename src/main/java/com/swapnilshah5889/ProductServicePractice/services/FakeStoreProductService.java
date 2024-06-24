@@ -3,6 +3,7 @@ package com.swapnilshah5889.ProductServicePractice.services;
 import com.swapnilshah5889.ProductServicePractice.DTOs.FakeStore.ProductResponseDTO;
 import com.swapnilshah5889.ProductServicePractice.models.Category;
 import com.swapnilshah5889.ProductServicePractice.models.Product;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpMessageConverterExtractor;
@@ -12,7 +13,8 @@ import org.springframework.web.client.RestTemplate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("FakeStoreProductService")
+@Primary
 public class FakeStoreProductService implements ProductService {
 
     RestTemplate restTemplate;
